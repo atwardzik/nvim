@@ -7,7 +7,7 @@ require("config.lazy")
 require("nvim-tree").setup()
 require("mason").setup()
 require("mason-lspconfig").setup()
-
+require("conform").setup()
 
 
 
@@ -47,4 +47,8 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' 
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 
-
+-- setup conform formatter
+vim.api.nvim_create_user_command("Format", function()
+  require("conform").format()
+end, {})
+vim.keymap.set("n", "<leader>ft", require("conform").format, { desc = "Run formatter" })
