@@ -20,12 +20,13 @@ vim.opt.tabstop = 8             -- set tab to be 8 spaces
 vim.opt.expandtab = true        -- 
 
 
-
-
 -- setup go to definition to use LSP
 vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 
+
+-- setup nvim-tree
+vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle nvim tree" })
 
 
 -- setup telescope
@@ -45,6 +46,7 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Telescope git status' })
 
 
 -- setup conform formatter
