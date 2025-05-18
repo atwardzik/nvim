@@ -8,7 +8,7 @@ require("nvim-tree").setup()
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("conform").setup()
-
+require("autoclose").setup()
 
 
 
