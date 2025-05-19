@@ -49,6 +49,10 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Telescope git status' })
 
 
+-- setup code action
+vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap = true, silent = true})
+
+
 -- setup conform formatter
 vim.api.nvim_create_user_command("Format", function()
   require("conform").format()
