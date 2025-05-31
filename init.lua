@@ -81,9 +81,18 @@ vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc
 vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end, { desc = "harpoon to file 5" })
 vim.keymap.set("n", "<leader>hr", function() harpoon:list():remove() end, { desc = "remove current buffer from harpoon" })
 
+local harpoon_files = require('harpoon_files')
+
+require('lualine').setup {
+        sections = {
+                lualine_c = {
+                        { harpoon_files.lualine_component },
+                },
+        },
+}
+
 -- setup code action
 vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap = true, silent = true})
-
 
 -- setup conform formatter
 vim.api.nvim_create_user_command("Format", function()
