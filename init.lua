@@ -49,6 +49,38 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>gs', builtin.git_status, { desc = 'Telescope git status' })
 
 
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
+
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+
+
+-- setup harpoon
+local harpoon = require('harpoon')
+harpoon:setup()
+
+vim.keymap.set("n", "<leader>hp", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
+vim.keymap.set("n", "<leader>A", function() harpoon:list():add() end, {desc = "harpoon file" })
+vim.keymap.set("n", "<leader>a", function() local harpoon = harpoon harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "harpoon quick menu" })
+vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "harpoon to file 1" })
+vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "harpoon to file 2" })
+vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "harpoon to file 3" })
+vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end, { desc = "harpoon to file 4" })
+vim.keymap.set("n", "<leader>5", function() harpoon:list():select(5) end, { desc = "harpoon to file 5" })
+vim.keymap.set("n", "<leader>hr", function() harpoon:list():remove() end, { desc = "remove current buffer from harpoon" })
+
 -- setup code action
 vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap = true, silent = true})
 
