@@ -10,6 +10,7 @@ require("mason-lspconfig").setup()
 require("conform").setup()
 require("autoclose").setup()
 require("gitsigns").setup()
+require('treesitter-context').setup()
 
 
 
@@ -92,11 +93,18 @@ require('lualine').setup {
         },
 }
 
+
 -- setup code action
 vim.keymap.set("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap = true, silent = true})
+
 
 -- setup conform formatter
 vim.api.nvim_create_user_command("Format", function()
   require("conform").format()
 end, {})
 vim.keymap.set("n", "<leader>ft", require("conform").format, { desc = "Run formatter" })
+
+
+-- setup docstring coloring
+vim.api.nvim_set_hl(0, "@comment.documentation", { fg = "#FFD700", bold = true })
+
