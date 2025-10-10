@@ -4,7 +4,7 @@ return {
   event = { 'BufReadPost', 'BufNewFile' },
   config = function()
     require('nvim-treesitter.configs').setup({
-      ensure_installed = { 'c', 'asm', 'lua', 'python', 'rust', 'cpp' },
+      ensure_installed = { 'c', 'lua', 'python', 'rust', 'cpp', 'swift' },
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
@@ -15,4 +15,3 @@ return {
     })
   end,
 }
-

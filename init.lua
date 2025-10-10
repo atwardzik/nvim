@@ -11,6 +11,7 @@ require("conform").setup()
 require("autoclose").setup()
 require("gitsigns").setup()
 require('treesitter-context').setup()
+require('trim').setup()
 
 
 
