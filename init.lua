@@ -13,14 +13,24 @@ require("gitsigns").setup()
 require('treesitter-context').setup()
 require('trim').setup()
 
+-- vim.lsp.config('asm_lsp', {
+--   cmd = { vim.fn.expand('~/.cargo/bin/asm-lsp') },
+--   filetypes = { 'asm', 's', 'S', 'gas' },
+-- })
 
+-- Then start or attach to the server
+-- vim.lsp.start({
+--   name = 'asm_lsp',
+--   cmd = { vim.fn.expand('~/.cargo/bin/asm-lsp') },
+--   root_dir = vim.fs.root(0, { '.asm-lsp.toml', '.git' }),
+-- })
 
 -- init vim
 vim.wo.number = true            -- lines numbering
 vim.opt.wrap = false            -- disable wrapping lines
 vim.opt.clipboard="unnamedplus" -- enable clipboard for macos
 vim.opt.tabstop = 8             -- set tab to be 8 spaces
-vim.opt.expandtab = true        -- 
+vim.opt.expandtab = true        --
 
 
 -- setup go to definition to use LSP
@@ -107,5 +117,25 @@ vim.keymap.set("n", "<leader>ft", require("conform").format, { desc = "Run forma
 
 
 -- setup docstring coloring
-vim.api.nvim_set_hl(0, "@comment.documentation", { fg = "#FFD700", bold = true })
+-- vim.api.nvim_set_hl(0, "@comment.documentation", { fg = "#FFD700", bold = true })
 
+-- Define a nice border style once
+local border = {
+  {"╭", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╮", "FloatBorder"},
+  {"│", "FloatBorder"},
+  {"╯", "FloatBorder"},
+  {"─", "FloatBorder"},
+  {"╰", "FloatBorder"},
+  {"│", "FloatBorder"},
+}
+
+-- Override the default floating preview function
+local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border   -- apply our border if none supplied
+  opts.focus_id = opts.focus_id or nil
+  return orig_open_floating_preview(contents, syntax, opts, ...)
+end
