@@ -8,7 +8,6 @@ require("nvim-tree").setup()
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("conform").setup()
-require("autoclose").setup()
 require("gitsigns").setup()
 require('treesitter-context').setup()
 require('trim').setup()
@@ -27,10 +26,17 @@ require('trim').setup()
 
 -- init vim
 vim.wo.number = true            -- lines numbering
+vim.opt.relativenumber = true
 vim.opt.wrap = false            -- disable wrapping lines
 vim.opt.clipboard="unnamedplus" -- enable clipboard for macos
 vim.opt.tabstop = 8             -- set tab to be 8 spaces
 vim.opt.expandtab = true        --
+vim.opt.foldmethod = "indent"   -- use indentation for folds
+vim.opt.foldnestmax = 1         -- fold only functions (one level)
+vim.opt.foldlevel = 99          -- open files with folds open
+vim.opt.foldopen = ""           -- don't auto open folds
+vim.opt.foldclose = ""          -- don't auto-close folds
+vim.opt.foldcolumn = "1"        -- show fold column
 
 
 -- setup go to definition to use LSP

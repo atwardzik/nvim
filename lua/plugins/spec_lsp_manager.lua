@@ -5,7 +5,7 @@ return {
         config = function()
                 require('mason').setup()
 		require('mason-lspconfig').setup({
-                        ensure_installed = { "clangd", "clang-format" }, -- "asm-lsp"
+                        ensure_installed = { "clangd", "clang-format", "bashls" }, -- "asm-lsp"
                 })
 
 		require('lspconfig').clangd.setup({
@@ -22,5 +22,7 @@ return {
 				"--header-insertion=iwyu",
 			},
 		})
+
+                require('lspconfig').bashls.setup({})
         end,
 }
